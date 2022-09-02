@@ -67,10 +67,10 @@ const displayNews = (allNewsData) => {
 
       singleNews.innerHTML = `
       <div class="row flex-column flex-sm-row g-0">
-        <div class="col-12 col-sm-3">
+        <div class="col-12 col-sm-4 col-md-3 text-center">
           <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="..." />
         </div>
-        <div class="col-12 col-sm-9 ">
+        <div class="col-12 col-sm-8 col-md-9">
           <div class="card-body">
             <h5 class="fw-bold card-title">${title}</h5>
             <p class="card-text">
@@ -94,10 +94,12 @@ const displayNews = (allNewsData) => {
                   total_view ? total_view + "M" : "No Data Available"
                 }</span>
               </div>
-              <div class="col-12 col-md-4 text-center text-md-end">
+              <div class="d-none d-md-block col-12 col-md-4 text-center text-md-end">
                     <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
                     data-bs-target="#newsDetailsModal"><i class="fa-solid fa-arrow-right"></i></a>
               </div>
+              <button class="d-md-none btn btn-primary"  onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
+              data-bs-target="#newsDetailsModal">Details</button>
             </div>
           </div>
         </div>
@@ -160,9 +162,6 @@ const displayNewsDetails = (singleNews) => {
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" class="btn btn-primary">
-                Save changes
               </button>
             </div>
   `;
