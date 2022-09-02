@@ -39,27 +39,43 @@ const displayNews = (allNewsData) => {
 
   if (hasNews) {
     allNews.forEach((news) => {
-      const { details, thumbnail_url, title, total_view, _id } = news;
+      const { author, details, thumbnail_url, title, total_view, _id } = news;
+      const { img, name, published_date } = author;
       const singleNews = document.createElement("div");
       singleNews.classList.add("card");
       singleNews.classList.add("mb-3");
       singleNews.classList.add("border-0");
-
-      console.log(hasNews);
 
       singleNews.innerHTML = `
       <div class="row g-0">
         <div class="col-md-3">
           <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="..." />
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 ">
           <div class="card-body">
-            <h5 class="card-title">${title}</h5>
+            <h5 class="fw-bold card-title">${title}</h5>
             <p class="card-text">
-              ${details.length > 200 ? details.slice(0, 300) + "..." : details}
+              ${details.length > 200 ? details.slice(0, 400) + "..." : details}
             </p>
-            <div>
-              
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="col-md-4">
+                <div class="author d-flex align-items-center gap-2">
+                  <div class="col-md-3">
+                    <img src="${
+                      name ? img : "./images/img-placeholder.png"
+                    }" class="img-fluid rounded-circle" alt="" />
+                  </div>
+                  <div class="col-md-9">
+                    <p class="mb-0">${name ? name : "No Info"}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 text-center">
+                <i class="fa-solid fa-eye"></i> <span>${total_view + "M"}</span>
+              </div>
+              <div class="col-md-4 text-end">
+                    <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
           </div>
         </div>
