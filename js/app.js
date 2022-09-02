@@ -74,7 +74,8 @@ const displayNews = (allNewsData) => {
                 <i class="fa-solid fa-eye"></i> <span>${total_view + "M"}</span>
               </div>
               <div class="col-md-4 text-end">
-                    <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
+                    data-bs-target="#newsDetailsModal"><i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
           </div>
@@ -88,6 +89,58 @@ const displayNews = (allNewsData) => {
     <h3 class="text-center text-danger">No News Found</h3>
     `;
   }
+};
+
+const loadNewsDetails = (newsId) => {
+  const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayNewsDetails(data.data));
+};
+
+const displayNewsDetails = (singleNews) => {
+  const modalContent = document.getElementById("modal-content");
+
+  const { author, details, image_url, title, total_view } = singleNews[0];
+  const { img, name, published_date } = author;
+
+  modalContent.innerHTML = `
+ 
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="newsDetailsModalLabel">
+                ${title}
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <img src="${image_url}" class="img-fluid" alt="" />
+              <div class="mt-4  d-flex justify-content-between align-items-center">
+                <p class="fw-bold">Author: ${name}</p> 
+                <p><i class="fa-solid fa-eye"></i> <span>${
+                  total_view + "M"
+                }</span></p>
+              </div>           
+              <p>${details}</p>
+
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+  `;
 };
 
 loadNews("05");
