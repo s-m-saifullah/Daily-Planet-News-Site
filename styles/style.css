@@ -6,3 +6,13 @@ footer,
 .navbar-brand {
   font-family: "Playfair Display", serif;
 }
+
+.author-img {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .author-img {
+    max-width: 25%;
+  }
+}

@@ -6,6 +6,9 @@ const loadCategories = () => {
 
 const displayCategories = (categories) => {
   const categoriesContainer = document.getElementById("cateogry-nav");
+  const topNav = document.getElementById("top-nav");
+  categoriesContainer.classList.add("d-none");
+  categoriesContainer.classList.add("d-lg-flex");
 
   categories.forEach((category) => {
     const { category_id, category_name } = category;
@@ -16,8 +19,17 @@ const displayCategories = (categories) => {
     li.innerHTML = `
     <a class="nav-link" href="#" onclick="loadNews('${category_id}')">${category_name}</a>
     `;
-
     categoriesContainer.appendChild(li);
+
+    // categories nav for top nav
+
+    const topNavLi = document.createElement("li");
+    topNavLi.classList.add("d-lg-none");
+    topNavLi.innerHTML = `
+    <a class="nav-link" href="#" onclick="loadNews('${category_id}')">${category_name}</a>
+    `;
+
+    topNav.appendChild(topNavLi);
   });
 };
 
@@ -54,35 +66,35 @@ const displayNews = (allNewsData) => {
       singleNews.classList.add("border-0");
 
       singleNews.innerHTML = `
-      <div class="row g-0">
-        <div class="col-md-3">
+      <div class="row flex-column flex-sm-row g-0">
+        <div class="col-12 col-sm-3">
           <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="..." />
         </div>
-        <div class="col-md-9 ">
+        <div class="col-12 col-sm-9 ">
           <div class="card-body">
             <h5 class="fw-bold card-title">${title}</h5>
             <p class="card-text">
-              ${details.length > 200 ? details.slice(0, 400) + "..." : details}
+              ${details.length > 200 ? details.slice(0, 300) + "..." : details}
             </p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="col-md-4">
-                <div class="author d-flex align-items-center gap-2">
-                  <div class="col-md-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+              <div class="col-12 col-md-4">
+                <div class="author d-md-flex align-items-center gap-2">
+                  <div class="col-md-2 text-center">
                     <img src="${
                       name ? img : "./images/img-placeholder.png"
-                    }" class="img-fluid rounded-circle" alt="" />
+                    }" class="author-img rounded-circle" alt="" />
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-md-10 text-center text-md-start my-2">
                     <p class="mb-0">${name ? name : "No data available"}</p>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 text-center">
+              <div class="col-12 col-md-4 text-center">
                 <i class="fa-solid fa-eye"></i> <span>${
                   total_view ? total_view + "M" : "No Data Available"
                 }</span>
               </div>
-              <div class="col-md-4 text-end">
+              <div class="col-12 col-md-4 text-center text-md-end">
                     <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
                     data-bs-target="#newsDetailsModal"><i class="fa-solid fa-arrow-right"></i></a>
               </div>
@@ -163,9 +175,7 @@ function loadSpinner(isLoaded) {
   const spinner = document.getElementById("spinner");
   if (isLoaded === false) {
     spinner.classList.remove("d-none");
-    console.log("data isn't loaded yet");
   } else {
     spinner.classList.add("d-none");
-    console.log("data has loaded");
   }
 }
