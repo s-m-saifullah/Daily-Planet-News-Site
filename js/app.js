@@ -32,6 +32,12 @@ const loadNews = (category_id) => {
 
 const displayNews = (allNewsData) => {
   const allNews = allNewsData.data;
+
+  // Sorting News according to view count
+  allNews.sort((a, b) => {
+    return b.total_view - a.total_view;
+  });
+
   const newsContainer = document.getElementById("news-details-container");
   newsContainer.innerHTML = "";
 
@@ -66,12 +72,14 @@ const displayNews = (allNewsData) => {
                     }" class="img-fluid rounded-circle" alt="" />
                   </div>
                   <div class="col-md-9">
-                    <p class="mb-0">${name ? name : "No Info"}</p>
+                    <p class="mb-0">${name ? name : "No data available"}</p>
                   </div>
                 </div>
               </div>
               <div class="col-md-4 text-center">
-                <i class="fa-solid fa-eye"></i> <span>${total_view + "M"}</span>
+                <i class="fa-solid fa-eye"></i> <span>${
+                  total_view ? total_view + "M" : "No Data Available"
+                }</span>
               </div>
               <div class="col-md-4 text-end">
                     <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
@@ -120,9 +128,11 @@ const displayNewsDetails = (singleNews) => {
             <div class="modal-body">
               <img src="${image_url}" class="img-fluid" alt="" />
               <div class="mt-4  d-flex justify-content-between align-items-center">
-                <p class="fw-bold">Author: ${name}</p> 
+                <p class="fw-bold">Author: ${
+                  name ? name : "No data Available"
+                }</p> 
                 <p><i class="fa-solid fa-eye"></i> <span>${
-                  total_view + "M"
+                  total_view ? total_view + "M" : "No data Available"
                 }</span></p>
               </div>           
               <p>${details}</p>
