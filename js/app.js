@@ -25,6 +25,7 @@ loadCategories();
 
 const loadNews = (category_id) => {
   const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
+  loadSpinner(false);
   fetch(url)
     .then((res) => res.json())
     .then((data) => displayNews(data));
@@ -92,10 +93,12 @@ const displayNews = (allNewsData) => {
     `;
       newsContainer.appendChild(singleNews);
     });
+    loadSpinner(true);
   } else {
     newsContainer.innerHTML = `
     <h3 class="text-center text-danger">No News Found</h3>
     `;
+    loadSpinner(true);
   }
 };
 
@@ -154,3 +157,15 @@ const displayNewsDetails = (singleNews) => {
 };
 
 loadNews("05");
+
+// Spinner
+function loadSpinner(isLoaded) {
+  const spinner = document.getElementById("spinner");
+  if (isLoaded === false) {
+    spinner.classList.remove("d-none");
+    console.log("data isn't loaded yet");
+  } else {
+    spinner.classList.add("d-none");
+    console.log("data has loaded");
+  }
+}
