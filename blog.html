@@ -47,20 +47,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul
-              id="top-nav"
-              class="navbar-nav text-center ms-auto mb-2 mb-lg-0"
-            >
-              <li class="nav-item d-lg-none">
-                <a
-                  class="nav-link"
-                  aria-current="page"
-                  href="index.html"
-                  data-bs-toggle="collapse"
-                  data-bs-target=".navbar-collapse.show"
-                  >Home</a
-                >
-              </li>
+            <ul class="navbar-nav text-center ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="index.html"
                   >News</a
@@ -77,5 +64,176 @@
     <div class="container">
       <hr />
     </div>
+
+    <!-- FAQ -->
+    <section>
+      <div class="container">
+        <h3 class="text-center my-4">Daily Planet FAQ</h3>
+        <div class="accordion" id="accordionExample">
+          <!-- Accordion Item I -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                What are the differences among
+                <strong class="mx-1">var, let</strong> and
+                <strong class="ms-1">const</strong>?
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <ul style="list-style-type: none">
+                  <li class="mb-2">
+                    1. Variable delcared with
+                    <strong class="mx-1">var</strong> can be accessed from
+                    anywhere in the document, be it within a block scope or
+                    global scope. Var can be reclared and reassigned.
+                  </li>
+                  <li class="mb-2">
+                    2. Variable declared with
+                    <strong class="mx-1">let</strong> is block scoped. They
+                    cannot be reclared but can be reassigned.
+                  </li>
+                  <li>
+                    2. Variable declared with
+                    <strong class="mx-1">const</strong> is block scoped. They
+                    cannot be reclared and reassigned.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                What are the differences between
+                <strong class="mx-1">arrow function</strong> and
+                <strong class="ms-1">regular function</strong>?
+              </button>
+            </h2>
+            <div
+              id="collapseTwo"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingTwo"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong class="me-1">Arrow function</strong> and
+                <strong class="mx-1">regular function</strong> are different
+                both in sytanx and their use. Arrow function can use implicit
+                return and parenthesis can be omitted if there is only one
+                parameter. Arrow functions can also be used as methods.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                What are the differences among
+                <strong class="mx-1">map(), forEach(), filter()</strong> and
+                <strong class="ms-1">find()</strong>?
+              </button>
+            </h2>
+            <div
+              id="collapseThree"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong>map(), forEach(), filter() </strong>and
+                <strong> find()</strong> are array methods and they can be used
+                in a variety of context.
+                <ul style="list-style-type: none">
+                  <li class="my-2">
+                    <strong>map() </strong> can return a new array transforming
+                    the given array.
+                  </li>
+                  <li class="mb-2">
+                    <strong>forEach() </strong> is used for looping through the
+                    elements of an array like other loops but with a easy to
+                    follow syntax.
+                  </li>
+                  <li class="mb-2">
+                    <strong>filter() </strong> is used for selecting a subset of
+                    a given array.
+                  </li>
+                  <li class="mb-2">
+                    <strong>find() </strong> is used for searching a single
+                    element of an array
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion Item 4 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseFour"
+                aria-expanded="false"
+                aria-controls="collapseFour"
+              >
+                Why would you use <strong class="ms-1">template string</strong>?
+              </button>
+            </h2>
+            <div
+              id="collapseFour"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingFour"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                <strong>Templeta string </strong> allows us to intergrate js
+                code directly inside string. Templete strings are written within
+                backtick (` `).
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container text-center text-secondary py-4">
+      <p>Copyright 2022 Daily Planet</p>
+    </footer>
+
+    <!-- scripts -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
