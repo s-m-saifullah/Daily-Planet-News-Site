@@ -1,3 +1,4 @@
+// Loading all categories from api
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/news/categories")
     .then((res) => res.json())
@@ -5,6 +6,7 @@ const loadCategories = () => {
     .catch((error) => console.log(error));
 };
 
+// displaying all categories in category nav
 const displayCategories = (categories) => {
   const categoriesContainer = document.getElementById("cateogry-nav");
   const topNav = document.getElementById("top-nav");
@@ -12,11 +14,12 @@ const displayCategories = (categories) => {
   categoriesContainer.classList.add("d-lg-flex");
 
   categories.forEach((category) => {
+    // destrugin category object
     const { category_id, category_name } = category;
-    // console.log(category_name);
     const li = document.createElement("li");
     li.classList.add("nav-item");
 
+    // appending categories in category nav
     li.innerHTML = `
     <a class="nav-link fw-bold" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
     `;
@@ -78,6 +81,7 @@ const displayNews = (allNewsData, catName) => {
       singleNews.classList.add("shadow-lg");
       singleNews.classList.add("border-0");
 
+      // Appending Single News Data
       singleNews.innerHTML = `
       <div class="row flex-column flex-sm-row g-0">
         <div class="col-12 col-sm-4 col-md-3 text-center">
@@ -144,6 +148,7 @@ const displayNews = (allNewsData, catName) => {
   }
 };
 
+// Loading Details News
 const loadNewsDetails = (newsId) => {
   const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
   fetch(url)
@@ -152,50 +157,54 @@ const loadNewsDetails = (newsId) => {
     .catch((error) => console.log(error));
 };
 
+// Displaing Details News
 const displayNewsDetails = (singleNews) => {
   const modalContent = document.getElementById("modal-content");
 
   const { author, details, image_url, title, total_view } = singleNews[0];
-  const { img, name, published_date } = author;
+  const { name, published_date } = author;
 
+  // Appending data for News Daetails Modal
   modalContent.innerHTML = `
  
-            <div class="modal-header">
-              <h5 class="modal-title fw-bold" id="newsDetailsModalLabel">
-                ${title}
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <img src="${image_url}" class="img-fluid" alt="" />
-              <div class="mt-4  d-flex justify-content-between align-items-center">
-                <p class="fw-bold">Author: ${
-                  name ? name : "No data Available"
-                }</p> 
-                <p><i class="fa-solid fa-eye"></i> <span>${
-                  total_view ? total_view + "M" : "No data Available"
-                }</span></p>
-              </div>           
-              <p>${details}</p>
+    <div class="modal-header">
+      <h5 class="modal-title fw-bold" id="newsDetailsModalLabel">
+        ${title}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <img src="${image_url}" class="img-fluid" alt="" />
+      <div class="mt-4  d-flex justify-content-between align-items-center">
+        <p class="fw-bold">Author: ${name ? name : "No data Available"}</p>
+        <p class="fw-bold">Published Date: ${dateTimeConverter(
+          published_date
+        )}</p> 
+        <p><i class="fa-solid fa-eye"></i> <span>${
+          total_view ? total_view + "M" : "No data Available"
+        }</span></p>
+      </div>           
+      <p>${details}</p>
 
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal"
+      >
+        Close
+      </button>
+    </div>
   `;
 };
 
+// Loading Data for populting homepage
 loadNews("05", "Entertainment");
 
 // Spinner
