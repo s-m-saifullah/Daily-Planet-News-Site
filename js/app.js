@@ -1,7 +1,8 @@
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/news/categories")
     .then((res) => res.json())
-    .then((data) => displayCategories(data.data.news_category));
+    .then((data) => displayCategories(data.data.news_category))
+    .catch((error) => console.log(error));
 };
 
 const displayCategories = (categories) => {
@@ -40,7 +41,8 @@ const loadNews = (category_id) => {
   loadSpinner(false);
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNews(data));
+    .then((data) => displayNews(data))
+    .catch((error) => console.log(error));
 };
 
 const displayNews = (allNewsData) => {
@@ -58,26 +60,41 @@ const displayNews = (allNewsData) => {
 
   if (hasNews) {
     allNews.forEach((news) => {
-      const { author, details, thumbnail_url, title, total_view, _id } = news;
+      const {
+        author,
+        details,
+        image_url,
+        thumbnail_url,
+        title,
+        total_view,
+        _id,
+      } = news;
       const { img, name, published_date } = author;
       const singleNews = document.createElement("div");
       singleNews.classList.add("card");
-      singleNews.classList.add("mb-3");
+      singleNews.classList.add("mb-4");
+      singleNews.classList.add("shadow-lg");
       singleNews.classList.add("border-0");
 
       singleNews.innerHTML = `
       <div class="row flex-column flex-sm-row g-0">
         <div class="col-12 col-sm-4 col-md-3 text-center">
-          <img src="${thumbnail_url}" class="img-fluid rounded-start" alt="..." />
+          <img src="${thumbnail_url}" class="d-none d-sm-block img-fluid rounded-start" alt="..." />
+          <img src="${image_url}" class="d-sm-none img-fluid rounded-start" alt="..." />
         </div>
-        <div class="col-12 col-sm-8 col-md-9">
+        <div class="col-12 col-sm-8 col-md-9 d-flex flex-column justify-content-between">
           <div class="card-body">
             <h5 class="fw-bold card-title">${title}</h5>
-            <p class="card-text">
-              ${details.length > 200 ? details.slice(0, 300) + "..." : details}
+            <p class="card-text d-none d-md-block">
+              ${details.length > 200 ? details.slice(0, 600) + "..." : details}
             </p>
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-              <div class="col-12 col-md-4">
+            <p class="card-text d-md-none">
+              ${details.length > 200 ? details.slice(0, 150) + "..." : details}
+            </p>
+          </div>
+          <div class="card-body d-flex align-items-end">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center">
+              <div class="col-12 col-sm-4">
                 <div class="author d-md-flex align-items-center gap-2">
                   <div class="col-md-2 text-center">
                     <img src="${
@@ -89,16 +106,16 @@ const displayNews = (allNewsData) => {
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-md-4 text-center">
-                <i class="fa-solid fa-eye"></i> <span>${
-                  total_view ? total_view + "M" : "No Data Available"
-                }</span>
-              </div>
-              <div class="d-none d-md-block col-12 col-md-4 text-center text-md-end">
-                    <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
-                    data-bs-target="#newsDetailsModal"><i class="fa-solid fa-arrow-right"></i></a>
-              </div>
-              <button class="d-md-none btn btn-primary"  onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
+            <div class="col-12 col-sm-4 text-center">
+              <i class="fa-solid fa-eye"></i> <span>${
+                total_view ? total_view + "M" : "No Data Available"
+              }</span>
+            </div>
+            <div class="d-none d-md-block col-12 col-sm-4 text-center text-md-end">
+                  <a href="#" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
+                  data-bs-target="#newsDetailsModal"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+              <button class="d-md-none btn btn-primary mt-2" onclick="loadNewsDetails('${_id}')" data-bs-toggle="modal"
               data-bs-target="#newsDetailsModal">Details</button>
             </div>
           </div>
@@ -120,7 +137,8 @@ const loadNewsDetails = (newsId) => {
   const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNewsDetails(data.data));
+    .then((data) => displayNewsDetails(data.data))
+    .catch((error) => console.log(error));
 };
 
 const displayNewsDetails = (singleNews) => {
