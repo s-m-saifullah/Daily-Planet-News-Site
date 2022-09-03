@@ -128,7 +128,7 @@ const displayNews = (allNewsData, catName) => {
     });
 
     // Displaying no of item
-
+    numberOfItem.classList.remove("d-none");
     numberOfItem.innerHTML = `
       <p class="mb-0">${allNews.length} is found for ${catName}</p>
     `;
@@ -136,7 +136,7 @@ const displayNews = (allNewsData, catName) => {
     // Turning of Spinner
     loadSpinner(true);
   } else {
-    numberOfItem.innerHTML = "";
+    numberOfItem.classList.add("d-none");
     newsContainer.innerHTML = `
     <h3 class="text-center text-danger">No News Found</h3>
     `;
