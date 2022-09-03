@@ -18,7 +18,7 @@ const displayCategories = (categories) => {
     li.classList.add("nav-item");
 
     li.innerHTML = `
-    <a class="nav-link cat-nav" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
+    <a class="nav-link fw-bold" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
     `;
     categoriesContainer.appendChild(li);
 
@@ -130,7 +130,7 @@ const displayNews = (allNewsData, catName) => {
     // Displaying no of item
 
     numberOfItem.innerHTML = `
-      <p>${allNews.length} is found for ${catName}</p>
+      <p class="mb-0">${allNews.length} is found for ${catName}</p>
     `;
 
     // Turning of Spinner
