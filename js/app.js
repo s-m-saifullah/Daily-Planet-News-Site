@@ -27,7 +27,7 @@ const displayCategories = (categories) => {
     const topNavLi = document.createElement("li");
     topNavLi.classList.add("d-lg-none");
     topNavLi.innerHTML = `
-    <a class="nav-link" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
+    <a class="nav-link" href="#" onclick="loadNews('${category_id}', '${category_name}')" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">${category_name}</a>
     `;
 
     topNav.appendChild(topNavLi);
