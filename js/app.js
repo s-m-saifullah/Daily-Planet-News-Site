@@ -130,7 +130,7 @@ const displayNews = (allNewsData, catName) => {
     // Displaying no of item
     numberOfItem.classList.remove("d-none");
     numberOfItem.innerHTML = `
-      <p class="mb-0">${allNews.length} is found for ${catName}</p>
+      <p class="mb-0">${allNews.length} news is found for ${catName}</p>
     `;
 
     // Turning of Spinner
