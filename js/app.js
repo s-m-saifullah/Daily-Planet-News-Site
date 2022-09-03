@@ -18,7 +18,7 @@ const displayCategories = (categories) => {
     li.classList.add("nav-item");
 
     li.innerHTML = `
-    <a class="nav-link" href="#" onclick="loadNews('${category_id}')">${category_name}</a>
+    <a class="nav-link cat-nav" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
     `;
     categoriesContainer.appendChild(li);
 
@@ -27,7 +27,7 @@ const displayCategories = (categories) => {
     const topNavLi = document.createElement("li");
     topNavLi.classList.add("d-lg-none");
     topNavLi.innerHTML = `
-    <a class="nav-link" href="#" onclick="loadNews('${category_id}')">${category_name}</a>
+    <a class="nav-link" href="#" onclick="loadNews('${category_id}', '${category_name}')">${category_name}</a>
     `;
 
     topNav.appendChild(topNavLi);
@@ -36,16 +36,16 @@ const displayCategories = (categories) => {
 
 loadCategories();
 
-const loadNews = (category_id) => {
+const loadNews = (category_id, catName) => {
   const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
   loadSpinner(false);
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayNews(data))
+    .then((data) => displayNews(data, catName))
     .catch((error) => console.log(error));
 };
 
-const displayNews = (allNewsData) => {
+const displayNews = (allNewsData, catName) => {
   const allNews = allNewsData.data;
 
   // Sorting News according to view count
@@ -55,7 +55,9 @@ const displayNews = (allNewsData) => {
 
   const newsContainer = document.getElementById("news-details-container");
   newsContainer.innerHTML = "";
+  const numberOfItem = document.getElementById("number-of-item");
 
+  // Checking if category has any news
   const hasNews = allNewsData.status;
 
   if (hasNews) {
@@ -124,8 +126,17 @@ const displayNews = (allNewsData) => {
     `;
       newsContainer.appendChild(singleNews);
     });
+
+    // Displaying no of item
+
+    numberOfItem.innerHTML = `
+      <p>${allNews.length} is found for ${catName}</p>
+    `;
+
+    // Turning of Spinner
     loadSpinner(true);
   } else {
+    numberOfItem.innerHTML = "";
     newsContainer.innerHTML = `
     <h3 class="text-center text-danger">No News Found</h3>
     `;
@@ -185,7 +196,7 @@ const displayNewsDetails = (singleNews) => {
   `;
 };
 
-loadNews("05");
+loadNews("05", "Entertainment");
 
 // Spinner
 function loadSpinner(isLoaded) {
