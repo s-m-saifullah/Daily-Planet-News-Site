@@ -181,11 +181,13 @@ const displayNewsDetails = (singleNews) => {
     <div class="modal-body">
       <img src="${image_url}" class="img-fluid" alt="" />
       <div class="mt-4  d-flex justify-content-between align-items-center">
-        <p class="fw-bold">Author: ${name ? name : "No data Available"}</p>
-        <p class="fw-bold">Published Date: ${dateTimeConverter(
+        <p class="fw-bold">Author: <span class="d-block d-md-inline">${
+          name ? name : "No data Available"
+        }</span></p>
+        <p class="fw-bold">Published Date: <span class="d-block d-md-inline">${dateTimeConverter(
           published_date
-        )}</p> 
-        <p><i class="fa-solid fa-eye"></i> <span>${
+        )}</span></p> 
+        <p class="ms-4"><i class="fa-solid fa-eye"></i> <span>${
           total_view ? total_view + "M" : "No data Available"
         }</span></p>
       </div>           
